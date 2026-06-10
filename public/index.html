@@ -1,89 +1,956 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>합법적 앞담화</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Noto Sans KR', sans-serif;
+    }
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/12.14.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/12.14.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/12.14.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/12.14.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/12.14.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/12.14.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/12.14.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/12.14.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/12.14.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/12.14.0/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    body {
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 100%);
+      color: #ffffff;
+      min-height: 100vh;
+    }
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+    .screen {
+      transition: opacity 0.3s ease;
+    }
+
+    .screen.hidden {
+      display: none;
+    }
+
+    .neon-purple {
+      color: #a855f7;
+      text-shadow: 0 0 5px #a855f7;
+    }
+
+    .neon-pink {
+      color: #ec4899;
+      text-shadow: 0 0 10px #ec4899, 0 0 20px #ec4899;
+    }
+
+    .neon-cyan {
+      color: #22d3ee;
+      text-shadow: 0 0 5px #22d3ee;
+    }
+
+    .title-main {
+      color: #a855f7;
+      text-shadow: 0 2px 8px rgba(168, 85, 247, 0.4);
+    }
+
+    .card-glow {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .card-glow:hover {
+      border-color: rgba(168, 85, 247, 0.8);
+      background: rgba(168, 85, 247, 0.1);
+    }
+
+    .btn-neon {
+      background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+    }
+
+    .btn-neon:hover {
+      box-shadow: 0 0 30px rgba(168, 85, 247, 0.8), 0 0 40px #a855f7;
+      transform: translateY(-2px);
+    }
+
+    .btn-neon:active {
+      transform: translateY(0);
+    }
+
+    .btn-neon:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .player-card {
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .player-card.selectable {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(168, 85, 247, 0.3);
+    }
+
+    .player-card.selectable:hover {
+      background: rgba(168, 85, 247, 0.15);
+      border-color: rgba(168, 85, 247, 0.6);
+    }
+
+    .player-card.selected {
+      background: rgba(168, 85, 247, 0.3);
+      border: 2px solid #a855f7;
+      box-shadow: 0 0 20px #a855f7, inset 0 0 20px rgba(168, 85, 247, 0.2);
+    }
+
+    .player-card.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .player-avatar {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .player-name {
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-align: center;
+      word-break: break-word;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      border: 1px solid rgba(168, 85, 247, 0.5);
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 0.5rem;
+      color: white;
+      margin: 0.5rem 0;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #a855f7;
+      background: rgba(168, 85, 247, 0.1);
+    }
+
+    input[type="text"]::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .accordion-button {
+      width: 100%;
+      text-align: left;
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      color: white;
+      cursor: pointer;
+      border-radius: 0.5rem;
+      margin: 0.5rem 0;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .accordion-button:hover {
+      background: rgba(168, 85, 247, 0.1);
+      border-color: rgba(168, 85, 247, 0.6);
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: rgba(168, 85, 247, 0.05);
+      border-left: 2px solid #a855f7;
+      padding: 0;
+    }
+
+    .accordion-content.open {
+      max-height: 300px;
+      padding: 0.75rem;
+    }
+
+    .score-bar {
+      background: linear-gradient(90deg, #a855f7 0%, #ec4899 100%);
+      height: 2rem;
+      border-radius: 0.25rem;
+      display: flex;
+      align-items: center;
+      padding: 0 0.5rem;
+      min-width: 2rem;
+      transition: width 0.5s ease;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body class="w-full h-full">
+
+<!-- Landing Screen -->
+<div id="screen-landing" class="screen w-full min-h-screen flex flex-col items-center justify-center p-6">
+  <div class="w-full max-w-md">
+    <!-- Game Icon -->
+    <div class="flex justify-center mb-8">
+      <div class="w-24 h-24 rounded-3xl bg-gradient-to-br from-purple-900 to-purple-700 flex items-center justify-center shadow-lg">
+        <span class="text-5xl">🎮</span>
+      </div>
     </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+    <!-- Title -->
+    <div class="text-center mb-1">
+      <h1 class="text-4xl md:text-5xl font-bold title-main">
+        합법적 앞담화
+      </h1>
+      <p class="text-lg text-gray-300 mt-2">
+        친구들과 함께하는 다수결 눈치 게임
+      </p>
+    </div>
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
+    <!-- Description -->
+    <p class="text-center text-gray-400 text-xs mb-8">
+      누가 가장 의심스러운가? ✨
+    </p>
+
+    <!-- Create Room Button -->
+    <button class="w-full py-4 px-6 rounded-full bg-gradient-to-r from-purple-600 to-purple-700 text-white font-bold text-lg mb-6 hover:shadow-lg hover:shadow-purple-600/50 transition-all active:scale-95 flex items-center justify-center gap-2" onclick="showCreateRoomModal()">
+      ⚡ 새 방 만들기
+    </button>
+
+    <!-- Divider -->
+    <div class="text-center text-gray-400 text-sm mb-6">또는</div>
+
+    <!-- Join Room Section -->
+    <div class="border border-purple-500/50 rounded-2xl p-6 backdrop-blur-sm bg-purple-900/20">
+      <p class="text-purple-300 font-bold mb-4 flex items-center justify-center gap-2">
+        🔓 방 코드로 입장하기
+      </p>
+
+      <input type="text" id="landing-join-code" placeholder="6자리 코드 입력" maxlength="6" style="text-transform: uppercase;" class="w-full py-3 px-4 rounded-lg bg-purple-900/40 border border-purple-500/40 text-white placeholder-gray-400 text-center text-lg font-bold tracking-widest mb-3 focus:border-purple-500 focus:bg-purple-900/60 transition-all">
+
+      <input type="text" id="landing-join-nickname" placeholder="닉네임" maxlength="12" class="w-full py-3 px-4 rounded-lg bg-purple-900/40 border border-purple-500/40 text-white placeholder-gray-400 mb-4 focus:border-purple-500 focus:bg-purple-900/60 transition-all">
+
+      <button class="w-full py-3 px-4 rounded-lg bg-purple-700/50 border border-purple-500/60 text-purple-200 font-bold hover:bg-purple-700/70 hover:border-purple-500 transition-all" onclick="quickJoinRoom()">
+        ⭐ 코드로 입장하기
+      </button>
+    </div>
+
+    <!-- Footer Text -->
+    <p class="text-center text-gray-500 text-xs mt-6">
+      💎 최대 12명 동시 플레이 가능
+    </p>
+  </div>
+</div>
+
+<!-- Lobby Screen -->
+<div id="screen-lobby" class="screen hidden w-full min-h-screen p-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="md:col-span-1 card-glow p-6 rounded-lg h-fit">
+        <h2 class="text-2xl font-bold neon-purple mb-4">방 정보</h2>
+        <div class="mb-6">
+          <p class="text-gray-400 mb-2">초대 코드:</p>
+          <div class="flex gap-2 items-center mb-3">
+            <p id="lobby-code" class="text-3xl font-bold neon-cyan flex-1 select-all text-center">XXXXXX</p>
+            <button class="btn-neon px-3 py-2 text-sm" onclick="copyRoomCode()" title="코드만 복사">
+              📋 코드
+            </button>
+          </div>
+          <button class="btn-neon w-full" onclick="copyWebsiteLink()" title="웹사이트 링크 복사">
+            🔗 공유 링크
+          </button>
+          <p class="text-gray-400 text-xs mt-3">💡 코드: 초대 코드만 공유 | 링크: 웹사이트 주소 공유</p>
+        </div>
+        <p class="text-gray-400 mb-4">참가자 (<span id="player-count">1</span>명):</p>
+        <div id="lobby-players" class="space-y-2 mb-6">
+        </div>
+        <button id="start-btn" class="btn-neon w-full" onclick="startGame()" disabled>
+          게임 시작
+        </button>
+        <button class="btn-neon w-full mt-2 opacity-50" onclick="endGame()">
+          나가기
+        </button>
+      </div>
+
+      <div class="md:col-span-2 card-glow p-6 rounded-lg">
+        <h2 class="text-2xl font-bold neon-pink mb-4">대기 중...</h2>
+        <p class="text-gray-400">
+          모든 플레이어가 입장할 때까지 기다리는 중입니다.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Vote Screen -->
+<div id="screen-vote" class="screen hidden w-full min-h-screen flex flex-col p-6">
+  <div class="max-w-6xl mx-auto w-full flex-1 flex flex-col">
+    <div class="card-glow p-6 rounded-lg mb-8">
+      <p class="text-gray-400 text-sm mb-2">라운드 <span id="round-number">1</span></p>
+      <h2 id="question-text" class="text-2xl md:text-3xl font-bold neon-cyan">
+        누가 가장 술을 많이 마실 것 같은가?
+      </h2>
+    </div>
+
+    <div class="flex-1">
+      <p class="text-gray-400 mb-4">지목할 사람을 선택하세요:</p>
+      <div id="vote-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+      </div>
+    </div>
+
+    <button id="vote-btn" class="btn-neon w-full py-4 text-lg" onclick="submitVote()" disabled>
+      투표 완료
+    </button>
+  </div>
+</div>
+
+<!-- Result Screen -->
+<div id="screen-result" class="screen hidden w-full min-h-screen p-6">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-3xl font-bold neon-pink mb-8">라운드 결과</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+      <div class="card-glow p-6 rounded-lg">
+        <h3 class="text-xl font-bold neon-cyan mb-4">투표 결과</h3>
+        <div id="vote-stats" class="space-y-3">
+        </div>
+      </div>
+
+      <div class="card-glow p-6 rounded-lg">
+        <h3 class="text-xl font-bold neon-cyan mb-4">현재 점수</h3>
+        <div id="score-ranking" class="space-y-2">
+        </div>
+      </div>
+    </div>
+
+    <div class="card-glow p-6 rounded-lg mb-8">
+      <h3 class="text-xl font-bold neon-purple mb-4">누가 누구를 지목했나?</h3>
+      <div id="vote-details" class="space-y-2">
+      </div>
+    </div>
+
+    <div class="flex gap-4">
+      <button id="next-round-btn" class="btn-neon flex-1" onclick="nextRound()">
+        다음 라운드
+      </button>
+      <button class="btn-neon flex-1" onclick="endGame()">
+        게임 종료
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modals -->
+<div id="create-room-modal" class="modal-backdrop hidden" onclick="if(event.target === this) closeModal('create-room-modal')">
+  <div class="modal-content">
+    <h2 class="text-2xl font-bold neon-purple mb-4">닉네임 입력</h2>
+    <input type="text" id="create-nickname" placeholder="게임에서 사용할 닉네임" maxlength="12">
+    <div class="flex gap-4 mt-6">
+      <button class="btn-neon flex-1" onclick="createRoom()">방 만들기</button>
+      <button class="btn-neon flex-1" onclick="closeModal('create-room-modal')">취소</button>
+    </div>
+  </div>
+</div>
+
+<div id="join-room-modal" class="modal-backdrop hidden" onclick="if(event.target === this) closeModal('join-room-modal')">
+  <div class="modal-content">
+    <h2 class="text-2xl font-bold neon-purple mb-4">방 입장</h2>
+    <input type="text" id="join-nickname" placeholder="게임에서 사용할 닉네임" maxlength="12">
+    <input type="text" id="join-code" placeholder="초대 코드 (6자리)" maxlength="6" style="text-transform: uppercase;">
+    <div class="flex gap-4 mt-6">
+      <button class="btn-neon flex-1" onclick="joinRoom()">입장하기</button>
+      <button class="btn-neon flex-1" onclick="closeModal('join-room-modal')">취소</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// 현재 접속한 호스트를 자동으로 사용 (로컬/공개 URL 모두 작동)
+const API_URL = `${window.location.protocol}//${window.location.host}/api`;
+
+const QUESTIONS = [
+  "가장 술을 많이 마실 것 같은 사람은?",
+  "가장 외로워 보이는 사람은?",
+  "가장 가난해 보이는 사람은?",
+  "가장 남의 말을 안 들을 것 같은 사람은?",
+  "가장 자기 얘기를 많이 할 것 같은 사람은?",
+  "가장 치사할 것 같은 사람은?",
+  "가장 거짓말을 잘할 것 같은 사람은?",
+  "가장 배신할 것 같은 사람은?",
+  "가장 옆 사람의 것을 탐낼 것 같은 사람은?",
+  "제일 놀라기 쉬울 것 같은 사람은?",
+];
+
+const gameState = {
+  roomCode: '',
+  myId: '',
+  myName: '',
+  players: {},
+  currentQuestion: {},
+  votes: {},
+  round: 1,
+  scores: {},
+  questionIndex: 0,
+  isHost: false,
+  gameStarted: false,
+  voted: false,
+};
+
+let pollingInterval = null;
+
+// ================================================================
+// UI HELPERS
+// ================================================================
+
+function showScreen(screenId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+  document.getElementById(screenId).classList.remove('hidden');
+}
+
+function closeModal(modalId) {
+  document.getElementById(modalId).classList.add('hidden');
+}
+
+function showCreateRoomModal() {
+  document.getElementById('create-room-modal').classList.remove('hidden');
+  document.getElementById('create-nickname').focus();
+}
+
+function showJoinRoomModal() {
+  document.getElementById('join-room-modal').classList.remove('hidden');
+  document.getElementById('join-nickname').focus();
+}
+
+// ================================================================
+// ROOM MANAGEMENT
+// ================================================================
+
+async function createRoom() {
+  const nickname = document.getElementById('create-nickname').value.trim();
+  if (!nickname) {
+    alert('닉네임을 입력해주세요');
+    return;
+  }
+
+  try {
+    const res = await fetch(`${API_URL}/rooms`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nickname })
+    });
+
+    if (!res.ok) throw new Error('방 생성 실패');
+
+    const data = await res.json();
+    gameState.roomCode = data.roomCode;
+    gameState.myId = data.playerId;
+    gameState.myName = nickname;
+    gameState.isHost = true;
+    gameState.players = data.room.players;
+    gameState.scores = data.room.scores;
+
+    console.log('✅ 방 생성:', gameState.roomCode);
+
+    closeModal('create-room-modal');
+    startPolling();
+    showLobby();
+  } catch (error) {
+    alert('서버 연결 실패: ' + error.message);
+    console.error(error);
+  }
+}
+
+async function joinRoom() {
+  const nickname = document.getElementById('join-nickname').value.trim();
+  const code = document.getElementById('join-code').value.trim().toUpperCase();
+
+  if (!nickname) {
+    alert('닉네임을 입력해주세요');
+    return;
+  }
+
+  if (!code || code.length !== 6) {
+    alert('올바른 초대 코드를 입력해주세요');
+    return;
+  }
+
+  try {
+    const res = await fetch(`${API_URL}/rooms/${code}/join`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nickname })
+    });
+
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.error);
+    }
+
+    const data = await res.json();
+    gameState.roomCode = code;
+    gameState.myId = data.playerId;
+    gameState.myName = nickname;
+    gameState.isHost = false;
+    gameState.players = data.room.players;
+    gameState.scores = data.room.scores;
+
+    console.log('✅ 방 입장:', gameState.roomCode);
+
+    closeModal('join-room-modal');
+    startPolling();
+    showLobby();
+  } catch (error) {
+    alert('입장 실패: ' + error.message);
+  }
+}
+
+async function quickJoinRoom() {
+  const nickname = document.getElementById('landing-join-nickname').value.trim();
+  const code = document.getElementById('landing-join-code').value.trim().toUpperCase();
+
+  if (!nickname) {
+    alert('닉네임을 입력해주세요');
+    return;
+  }
+
+  if (!code || code.length !== 6) {
+    alert('올바른 초대 코드를 입력해주세요');
+    return;
+  }
+
+  try {
+    const res = await fetch(`${API_URL}/rooms/${code}/join`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nickname })
+    });
+
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.error);
+    }
+
+    const data = await res.json();
+    gameState.roomCode = code;
+    gameState.myId = data.playerId;
+    gameState.myName = nickname;
+    gameState.isHost = false;
+    gameState.players = data.room.players;
+    gameState.scores = data.room.scores;
+
+    console.log('✅ 방 입장:', gameState.roomCode);
+
+    startPolling();
+    showLobby();
+  } catch (error) {
+    alert('입장 실패: ' + error.message);
+  }
+}
+
+function showLobby() {
+  document.getElementById('lobby-code').textContent = gameState.roomCode;
+  const playersList = Object.values(gameState.players);
+  document.getElementById('player-count').textContent = playersList.length;
+
+  const playersHtml = document.getElementById('lobby-players');
+  playersHtml.innerHTML = playersList.map(p => `
+    <div class="flex items-center gap-2">
+      <span class="text-xl">${p.avatar}</span>
+      <span>${p.name}${p.id === gameState.myId ? ' (나)' : ''}</span>
+    </div>
+  `).join('');
+
+  const startBtn = document.getElementById('start-btn');
+  const canStart = gameState.isHost && playersList.length >= 2;
+  startBtn.disabled = !canStart;
+  startBtn.style.opacity = canStart ? '1' : '0.5';
+  startBtn.style.cursor = canStart ? 'pointer' : 'not-allowed';
+
+  showScreen('screen-lobby');
+}
+
+async function startGame() {
+  if (!gameState.isHost) {
+    alert('호스트만 게임을 시작할 수 있습니다');
+    return;
+  }
+
+  try {
+    const res = await fetch(`${API_URL}/rooms/${gameState.roomCode}/start`, {
+      method: 'POST'
+    });
+
+    if (!res.ok) throw new Error('게임 시작 실패');
+
+    gameState.gameStarted = true;
+    gameState.round = 1;
+    gameState.questionIndex = 0;
+    gameState.votes = {};
+    gameState.voted = false;
+
+    console.log('🎯 게임 시작!');
+    showVoteScreen();
+  } catch (error) {
+    alert('게임 시작 실패: ' + error.message);
+  }
+}
+
+// ================================================================
+// VOTE SCREEN
+// ================================================================
+
+function showVoteScreen() {
+  const question = QUESTIONS[gameState.questionIndex];
+  document.getElementById('round-number').textContent = gameState.round;
+  document.getElementById('question-text').textContent = question;
+
+  gameState.votes = {};
+  gameState.voted = false;
+
+  const playersList = Object.values(gameState.players);
+  const grid = document.getElementById('vote-grid');
+  grid.innerHTML = playersList.map(p => `
+    <div
+      class="player-card ${p.id !== gameState.myId ? 'selectable' : 'disabled'}"
+      data-player-id="${p.id}"
+      onclick="${p.id !== gameState.myId ? `selectPlayer('${p.id}')` : ''}"
+    >
+      <div class="player-avatar">${p.avatar}</div>
+      <div class="player-name">${p.name}</div>
+    </div>
+  `).join('');
+
+  const voteBtn = document.getElementById('vote-btn');
+  voteBtn.disabled = true;
+  voteBtn.textContent = '투표 완료';
+  voteBtn.style.opacity = '1';
+
+  showScreen('screen-vote');
+}
+
+function selectPlayer(playerId) {
+  document.querySelectorAll('.player-card.selected').forEach(card => {
+    card.classList.remove('selected');
+  });
+
+  document.querySelector(`[data-player-id="${playerId}"]`).classList.add('selected');
+  gameState.votes[gameState.myId] = playerId;
+  document.getElementById('vote-btn').disabled = false;
+
+  const playersList = Object.values(gameState.players);
+  const target = playersList.find(p => p.id === playerId);
+  console.log(`🗳️ 투표: ${gameState.myName} → ${target?.name}`);
+}
+
+async function submitVote() {
+  if (!gameState.votes[gameState.myId]) {
+    alert('투표할 사람을 선택해주세요');
+    return;
+  }
+
+  gameState.voted = true;
+
+  try {
+    const res = await fetch(`${API_URL}/rooms/${gameState.roomCode}/vote`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        playerId: gameState.myId,
+        targetId: gameState.votes[gameState.myId]
+      })
+    });
+
+    if (!res.ok) throw new Error('투표 실패');
+
+    document.getElementById('vote-btn').disabled = true;
+    document.getElementById('vote-btn').textContent = '투표 대기 중...';
+    document.querySelectorAll('.player-card.selectable').forEach(card => {
+      card.style.pointerEvents = 'none';
+      card.style.opacity = '0.5';
+    });
+
+    console.log('📤 투표 제출됨');
+  } catch (error) {
+    alert('투표 실패: ' + error.message);
+  }
+}
+
+// ================================================================
+// RESULT SCREEN
+// ================================================================
+
+function findMostVoted(votes) {
+  const tally = {};
+  Object.values(votes).forEach(targetId => {
+    tally[targetId] = (tally[targetId] || 0) + 1;
+  });
+
+  if (Object.keys(tally).length === 0) {
+    return { winners: [], maxCount: 0, tally: {} };
+  }
+
+  const maxCount = Math.max(...Object.values(tally));
+  const winners = Object.keys(tally).filter(id => tally[id] === maxCount);
+
+  return { winners, maxCount, tally };
+}
+
+function calcScores(votes, winners) {
+  Object.entries(votes).forEach(([voterId, targetId]) => {
+    if (winners.includes(targetId)) {
+      gameState.scores[voterId] = (gameState.scores[voterId] || 0) + 1;
+    }
+  });
+}
+
+function showResultScreen(winners, tally) {
+  const playersList = Object.values(gameState.players);
+
+  const statsHtml = playersList.map(p => {
+    const votes = tally[p.id] || 0;
+    const isWinner = winners.includes(p.id);
+    const barWidth = playersList.length > 0 ? (votes / playersList.length) * 100 : 0;
+
+    return `
+      <div>
+        <div class="flex justify-between items-center mb-1">
+          <span class="font-semibold">${p.avatar} ${p.name}${isWinner ? ' 🎯' : ''}</span>
+          <span class="text-sm">${votes}표</span>
+        </div>
+        <div style="background: rgba(255,255,255,0.1); border-radius: 0.25rem; overflow: hidden;">
+          <div class="score-bar" style="width: ${barWidth}%;"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('vote-stats').innerHTML = statsHtml;
+
+  const sortedByScore = [...playersList].sort((a, b) => gameState.scores[b.id] - gameState.scores[a.id]);
+  const rankingHtml = sortedByScore.map((p, idx) => `
+    <div class="flex justify-between items-center">
+      <span>${idx + 1}. ${p.avatar} ${p.name}</span>
+      <span class="font-bold neon-cyan">${gameState.scores[p.id] || 0}점</span>
+    </div>
+  `).join('');
+
+  document.getElementById('score-ranking').innerHTML = rankingHtml;
+
+  const detailsHtml = playersList.map(p => {
+    const voters = Object.entries(gameState.votes)
+      .filter(([_, targetId]) => targetId === p.id)
+      .map(([voterId]) => playersList.find(pl => pl.id === voterId)?.name);
+
+    return `
+      <button class="accordion-button" onclick="toggleAccordion(this)">
+        ${p.avatar} ${p.name} (${voters.length}표)
+      </button>
+      <div class="accordion-content">
+        ${voters.length > 0 ? voters.map(v => `<div>• ${v}</div>`).join('') : '<div>0표</div>'}
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('vote-details').innerHTML = detailsHtml;
+  showScreen('screen-result');
+}
+
+function toggleAccordion(button) {
+  const content = button.nextElementSibling;
+  content.classList.toggle('open');
+}
+
+async function nextRound() {
+  gameState.round += 1;
+  gameState.questionIndex += 1;
+
+  if (gameState.questionIndex >= QUESTIONS.length) {
+    gameState.questionIndex = 0;
+  }
+
+  try {
+    const res = await fetch(`${API_URL}/rooms/${gameState.roomCode}/next-round`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        round: gameState.round,
+        questionIndex: gameState.questionIndex,
+        scores: gameState.scores
+      })
+    });
+
+    if (!res.ok) throw new Error('다음 라운드 로드 실패');
+
+    showVoteScreen();
+  } catch (error) {
+    alert('다음 라운드 로드 실패: ' + error.message);
+  }
+}
+
+async function endGame() {
+  if (confirm('게임을 종료하시겠습니까?')) {
+    try {
+      await fetch(`${API_URL}/rooms/${gameState.roomCode}/end`, {
+        method: 'POST'
       });
-    </script>
-  </body>
+    } catch (error) {
+      console.error(error);
+    }
+
+    stopPolling();
+    showScreen('screen-landing');
+    gameState.round = 1;
+    gameState.questionIndex = 0;
+    gameState.gameStarted = false;
+    gameState.voted = false;
+  }
+}
+
+// ================================================================
+// POLLING & INVITE
+// ================================================================
+
+function copyRoomCode() {
+  navigator.clipboard.writeText(gameState.roomCode).then(() => {
+    alert('초대 코드가 클립보드에 복사되었습니다!\n\n' + gameState.roomCode);
+  }).catch(() => {
+    prompt('초대 코드를 복사하세요:', gameState.roomCode);
+  });
+}
+
+async function copyWebsiteLink() {
+  try {
+    const res = await fetch(`${API_URL}/server-info`);
+    const serverInfo = await res.json();
+    const publicLink = `${serverInfo.url}?room=${gameState.roomCode}`;
+
+    navigator.clipboard.writeText(publicLink).then(() => {
+      alert('공개 링크가 클립보드에 복사되었습니다!\n\n' + publicLink);
+    }).catch(() => {
+      prompt('공개 링크를 복사하세요:', publicLink);
+    });
+  } catch (error) {
+    // 서버 정보를 가져올 수 없으면 현재 URL 사용
+    const publicLink = `${window.location.protocol}//${window.location.host}?room=${gameState.roomCode}`;
+
+    navigator.clipboard.writeText(publicLink).then(() => {
+      alert('공개 링크가 클립보드에 복사되었습니다!\n\n' + publicLink);
+    }).catch(() => {
+      prompt('공개 링크를 복사하세요:', publicLink);
+    });
+  }
+}
+
+function startPolling() {
+  if (pollingInterval) clearInterval(pollingInterval);
+
+  pollingInterval = setInterval(async () => {
+    try {
+      const res = await fetch(`${API_URL}/rooms/${gameState.roomCode}`);
+      if (!res.ok) {
+        stopPolling();
+        alert('방이 종료되었습니다');
+        showScreen('screen-landing');
+        return;
+      }
+
+      const room = await res.json();
+
+      // 플레이어 목록 업데이트
+      gameState.players = room.players;
+      gameState.scores = room.scores || gameState.scores;
+
+      const currentScreen = document.querySelector('.screen:not(.hidden)');
+      if (currentScreen && currentScreen.id === 'screen-lobby') {
+        showLobby();
+      }
+
+      // 게임 시작 감지
+      if (room.started && !gameState.gameStarted && !gameState.isHost) {
+        gameState.gameStarted = true;
+        gameState.round = room.round || 1;
+        gameState.questionIndex = room.questionIndex || 0;
+        gameState.votes = room.votes || {};
+        gameState.voted = false;
+        showVoteScreen();
+      }
+
+      // 투표 결과 확인
+      if (gameState.gameStarted && gameState.voted) {
+        gameState.votes = room.votes || {};
+        const playerIds = Object.keys(gameState.players);
+        const allVoted = playerIds.every(id => id in gameState.votes);
+
+        if (allVoted) {
+          const { winners, tally } = findMostVoted(gameState.votes);
+          calcScores(gameState.votes, winners);
+          showResultScreen(winners, tally);
+        }
+      }
+    } catch (error) {
+      console.error('폴링 실패:', error);
+    }
+  }, 500);
+}
+
+function stopPolling() {
+  if (pollingInterval) {
+    clearInterval(pollingInterval);
+    pollingInterval = null;
+  }
+}
+
+function checkUrlParams() {
+  const params = new URLSearchParams(window.location.search);
+  const roomCode = params.get('room');
+
+  if (roomCode) {
+    document.getElementById('join-code').value = roomCode;
+    document.getElementById('join-room-modal').classList.remove('hidden');
+    document.getElementById('join-nickname').focus();
+  }
+}
+
+window.addEventListener('load', () => {
+  checkUrlParams();
+});
+</script>
+
+</body>
 </html>
