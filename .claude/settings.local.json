@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem *)",
+      "PowerShell(Start-Process \"C:\\\\Users\\\\joenr\\\\party game\\\\index.html\")",
+      "Skill(run)",
+      "Bash(Select-Object Name, PSIsContainer)",
+      "Bash(npm start *)",
+      "Bash(curl -s http://localhost:3000/)",
+      "PowerShell(Start-Process \"http://localhost:3000\")",
+      "Bash(powershell -Command ' *)",
+      "Bash(node capture.js)",
+      "Bash(node verify-design.js)",
+      "Bash(claude session *)",
+      "Bash(curl -s http://localhost:3000/api/server-info)",
+      "Bash(npm install *)",
+      "Bash(timeout 5 node start-public.js)"
+    ]
+  }
+}

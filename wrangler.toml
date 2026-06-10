@@ -1,0 +1,8 @@
+name = "party-game"
+main = "server.js"
+compatibility_date = "2024-01-01"
+
+[env.production]
+routes = [
+  { pattern = "my-party-game.trycloudflare.com", zone_name = "trycloudflare.com" }
+]
